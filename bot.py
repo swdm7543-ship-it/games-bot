@@ -524,7 +524,7 @@ class XOView(discord.ui.View):
         self.add_buttons()
         await interaction.edit_original_response(content=self.render(), view=self)
 
-@bot.hybrid_command(name="XO", description="تكتكتو")
+@bot.hybrid_command(name="xo", description="تكتكتو")
 async def xo(ctx, opponent: discord.Member = None):
     if opponent is None:
         view = XOView(ctx.author)

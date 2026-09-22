@@ -377,13 +377,13 @@ async def nhie(ctx):
     await msg.add_reaction("❌")
     
     class HigherLowerView(discord.ui.View):
-    def __init__(self, author_id, guild_id):
-        super().__init__(timeout=60)
-        self.author_id = author_id
-        self.guild_id = guild_id
-        self.current = random.randint(1, 100)
-        self.round = 0
-        self.max = 5
+        def __init__(self, author_id, guild_id):
+            super().__init__(timeout=60)
+            self.author_id = author_id
+            self.guild_id = guild_id
+            self.current = random.randint(1, 100)
+            self.round = 0
+            self.max = 5
     def make_embed(self):
         return discord.Embed(title="🎲 أعلى أو أقل", description=f"الرقم: **{self.current}**\nالجولة: {self.round}/{self.max}", color=discord.Color.purple())
     async def play(self, interaction, choice):

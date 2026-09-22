@@ -243,8 +243,8 @@ async def rps(ctx, opponent: discord.Member = None):
         view = RPSView(ctx.author.id, opponent.id, opponent.display_name)
         embed = discord.Embed(title="🎮 حجرة ورقة مقص", description=f"{ctx.author.mention} ضد {opponent.mention}\n\nكلاكما اخترا!", color=discord.Color.green())
     await ctx.send(embed=embed, view=view)
-    
-    @bot.hybrid_command(name="تخمين", description="خمن الرقم بين 1 و 100")
+
+@bot.hybrid_command(name="تخمين", description="خمن الرقم بين 1 و 100")
 async def guess(ctx):
     number = random.randint(1, 100)
     extra = await db.has_item(ctx.author.id, ctx.guild.id, "محاولة")

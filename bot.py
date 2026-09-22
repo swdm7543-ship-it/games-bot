@@ -145,7 +145,7 @@ async def buy(ctx, game: str, item_id: str):
     await ctx.send(f"✅ اشتريت **{item_id}** بـ {price} نقطة!")
     
     class RouletteView(discord.ui.View):
-    def __init__(self):
+        def __init__(self):
         super().__init__(timeout=60)
         self.players = []
         self.started = False

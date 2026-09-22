@@ -576,8 +576,23 @@ async def mafia(ctx):
     embed = discord.Embed(title="🕵️ المافيا", description="🕵️🕵️🕵️👨‍🌾👨‍🌾👨‍🌾\n\nانضم (4 لاعبين على الأقل).", color=discord.Color.dark_purple())
     await ctx.send(embed=embed, view=MafiaView(ctx.author))
 
-@bot.hybrid_command(name="بينغو", description="لعبة بينغو")
+import time
+
+@bot.hybrid_command(name="بينغو", description="لعبة بينغو (كل 6 ساعات)")
 async def bingo(ctx):
+    async with db.aiosqlite.connect(db.DB_PATH) as d:
+        async with d.execute(
+            "SELECT last_used FROM cooldowns WHERE user_id=? AND guild_id=? AND command=?",
+            (ctx.author.id, ctx.guild.id, "bingo")
+        ) as cur:
+            row = await cur.fetchone()
+    now = int(time.time())
+    cooldown = 6 * 60 * 60
+    if row and now - row[0] < cooldown:
+        remaining = cooldown - (now - row[0])
+        h = remaining // 3600
+        m = (remaining % 3600) // 60
+        return await ctx.send(f"⏰ باقي **{h}س {m}د** عشان تلعب بينغو مرة ثانية.")
     numbers = random.sample(range(1, 51), 5)
     embed = discord.Embed(title="🎱 بينغو", description=f"أرقامك: **{', '.join(map(str, numbers))}**\n\nجاري السحب...", color=discord.Color.gold())
     await ctx.send(embed=embed)

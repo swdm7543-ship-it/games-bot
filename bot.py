@@ -142,7 +142,8 @@ async def buy(ctx, game: str, item_id: str):
     if not ok:
         return await ctx.send(f"❌ ما عندك نقاط كافية! تحتاج **{price}**.")
     await db.add_item(ctx.author.id, ctx.guild.id, item_id, game)
-    await ctx.send(f"✅ اشتريت **{item_id}** بـ {price} نقطة!")class RouletteView(discord.ui.View):
+    await ctx.send(f"✅ اشتريت **{item_id}** بـ {price} نقطة!")
+    class RouletteView(discord.ui.View):
     def __init__(self):
         super().__init__(timeout=60)
         self.players = []

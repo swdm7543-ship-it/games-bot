@@ -146,9 +146,9 @@ async def buy(ctx, game: str, item_id: str):
     
     class RouletteView(discord.ui.View):
         def __init__(self):
-        super().__init__(timeout=60)
-        self.players = []
-        self.started = False
+            super().__init__(timeout=60)
+            self.players = []
+            self.started = False
 
     @discord.ui.button(label="انضم", style=discord.ButtonStyle.success, emoji="🔫")
     async def join(self, interaction, button):
